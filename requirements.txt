@@ -1,0 +1,9 @@
+tornado
+celery
+tornado-celery
+eventlet
+gevent
+pika
+flower
+msgpack-python
+msgpack-pure
