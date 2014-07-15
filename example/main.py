@@ -47,7 +47,7 @@ class Application(tornado.web.Application):
             (r"/", handler.MainHandler),
         ]
         settings = dict(
-            title=u"Tornado Restful",
+            title=u"Tornado Celery Handler",
             #template_path=os.path.join(os.path.dirname(__file__), "templates"),
             #static_path=os.path.join(os.path.dirname(__file__), "static"),
             xsrf_cookies=False,
