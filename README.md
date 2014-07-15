@@ -6,5 +6,5 @@ Simple routing for tornado-celery implementation
 Install :
 TODO
 
-Usage :
+How To Use :
 TODO
