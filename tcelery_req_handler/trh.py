@@ -122,7 +122,7 @@ class TCeleryAsyncHandler(tornado.web.RequestHandler, ptask_req_handler.TaskRequ
 
 
 def routes(route_list):
-    return python_rest_handler.routes(route_list)
+    return ptask_req_handler.routes(route_list)
 
 def tcelery_routes(uri_path, **kwargs):
     kwargs['base_handler'] = kwargs.get('base_handler', TCeleryReqHandler)
@@ -134,7 +134,7 @@ def tcelery_routes(uri_path, **kwargs):
     kwargs['put_tasks'] = kwargs.get('put_tasks', [])
     kwargs['delete_tasks'] = kwargs.get('delete_tasks', [])
 
-    return python_rest_handler.task_routes(uri_path, tasks, **kwargs)
+    return ptask_req_handler.task_routes(uri_path, tasks, **kwargs)
 
 def tcelery_async_routes(uri_path, **kwargs):
     kwargs['base_handler'] = kwargs.get('base_handler', TCeleryAsyncHandler)
@@ -146,4 +146,4 @@ def tcelery_async_routes(uri_path, **kwargs):
     kwargs['put_tasks'] = kwargs.get('put_tasks', [])
     kwargs['delete_tasks'] = kwargs.get('delete_tasks', [])
 
-    return python_rest_handler.task_routes(uri_path, tasks, **kwargs)
+    return ptask_req_handler.task_routes(uri_path, tasks, **kwargs)
