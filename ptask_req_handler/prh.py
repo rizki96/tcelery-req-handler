@@ -1,8 +1,11 @@
 __author__ = 'rizki'
 
 import logging
+import tcelery
 
 from tornado import gen
+
+tcelery.setup_nonblocking_producer()
 
 class TaskExecutor(object):
 
