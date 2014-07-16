@@ -65,7 +65,9 @@ Benchmarks :
     * linux ubuntu virtualbox vm (2 processor, 3 GB memory), 1 tornado process, 1 celery queue
 2. Result
     * Without database call, waiting for result :
+      ```
       ab -n 1000 -c 500 http://localhost:8888/v1/user
+      ```
 
         ```
         Concurrency Level:      500
@@ -88,7 +90,9 @@ Benchmarks :
         Total:       2146 8327 2543.6   8280   13850
         ```
     * Using database call (postgresql hstore ext, peewee orm, psycopg2), waiting for result :
+      ```
       ab -n 1000 -c 500 http://localhost:8888/v1/user
+      ```
 
         ```
         Concurrency Level:      500
@@ -111,7 +115,9 @@ Benchmarks :
         Total:        873 8242 3898.8   7487   14613
         ```
     * Fire and forget :
+      ```
       ab -n 1000 -c 500 http://localhost:8888/v1/async_user
+      ```
 
         ```
         Concurrency Level:      500
