@@ -61,7 +61,6 @@ How To Use :
 Benchmarks :
 ------------
 1. Setup
-
     * linux ubuntu virtualbox vm (2 processor, 3 GB memory), 1 tornado process, 1 celery queue
 2. Result
     * Without database call, waiting for result :
