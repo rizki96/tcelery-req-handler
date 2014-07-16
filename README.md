@@ -3,7 +3,7 @@ tcelery-req-handler
 ===================
 
 Simple routing handler for tornado-celery implementation. All tornado request will be processed in celery task asynchronously,
-with fire and forget style or the handler waiting for result style. This module depend on [tornado-celery module]
+with "fire and forget" style or "the handler waiting for result" style. This module depend on [tornado-celery module]
 (https://github.com/mher/tornado-celery) and the code structure was taken from [python-rest-handler]
 (https://github.com/paulocheque/python-rest-handler) and [tornado-rest-handler](https://github.com/paulocheque/tornado-rest-handler)
 project with some adjustments.
@@ -36,7 +36,7 @@ How To Use :
     * tcelery_async_routes(uri_path, get_tasks=[], post_tasks=[], put_tasks=[], delete_tasks=[], handler=None)
 
         routes that will trigger celery tasks, default behaviour is tornado handler won't wait for executed task, it will
-        do fire and forget the tasks process
+        do "fire and forget" the tasks process
         - uri_path : tornado uri
         - get_tasks : tasks list that will be triggered by http get method
         - post_tasks : tasks list that will be triggered by http post method
