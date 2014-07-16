@@ -6,7 +6,7 @@ Simple routing handler for tornado-celery implementation. All tornado request wi
 with "fire and forget" style or "the handler waiting for result" style. This module depend on [tornado-celery module]
 (https://github.com/mher/tornado-celery) and the code structure was taken from [python-rest-handler]
 (https://github.com/paulocheque/python-rest-handler) and [tornado-rest-handler](https://github.com/paulocheque/tornado-rest-handler)
-project with some adjustments.
+projects with some adjustments.
 
 
 Prerequisites :
@@ -57,6 +57,7 @@ How To Use :
     ```
     "http://localhost:8888/v1/user"
     ```
+
 
 Benchmarks :
 ------------
