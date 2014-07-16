@@ -4,17 +4,58 @@ import ujson as json
 import logging
 
 from celery import Celery
-from playhouse import postgres_ext
 
-from backend import celeryconfig, model
-
-import config
+from backend import celeryconfig
 
 celery = Celery()
 celery.config_from_object(celeryconfig)
 
+# without database
+@celery.task
+def list_create_users(*args, **kwargs):
+    if args:
+        logging.info('args: %s' % args)
+    if kwargs:
+        logging.info('kwargs: %s' % kwargs)
+    retval = '''
+    [
+    {'is_superadmin': 0, 'name': 'user1', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 1},
+    {'is_superadmin': 0, 'name': 'user2', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 2},
+    {'is_superadmin': 0, 'name': 'user3', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 3},
+    {'is_superadmin': 0, 'name': 'user4', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 4},
+    {'is_superadmin': 0, 'name': 'user5', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 5},
+    {'is_superadmin': 0, 'name': 'user6', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 6},
+    {'is_superadmin': 0, 'name': 'user7', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 7},
+    {'is_superadmin': 0, 'name': 'user8', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 8},
+    {'is_superadmin': 0, 'name': 'user9', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 9},
+    {'is_superadmin': 0, 'name': 'user10', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 10}
+    ]
+    '''
+    if not retval:
+        return {}
+    return str(retval)
+
+@celery.task
+def show_edit_delete_users(*args, **kwargs):
+    if args:
+        logging.info('args: %s' % args)
+    if kwargs:
+        logging.info('kwargs: %s' % kwargs)
+    retval = '''
+    {'is_superadmin': 0, 'name': 'user1', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 1}
+    '''
+    return str(retval)
+
+
+"""
+from playhouse import postgres_ext
+
+from backend import model
+import config
+
 model.psqldb.initialize(postgres_ext.PostgresqlExtDatabase(config.default.db_name, user=config.default.db_user, password=config.default.db_password, host=config.default.db_ipaddr))
 
+# using database
 @celery.task
 def list_create_users(*args, **kwargs):
     if args:
@@ -46,7 +87,7 @@ def show_edit_delete_users(*args, **kwargs):
         logging.warning(e)
         return {}
     return str(retval)
-
+"""
 
 if __name__ == "__main__":
     celery.start()

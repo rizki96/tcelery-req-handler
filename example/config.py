@@ -24,7 +24,7 @@ _d = {
     "redis_expire": 60,
     "base_path":os.path.join(os.path.dirname(__file__), "static"),
     "log_search": False,
-    #"static_base_url": "http://203.190.243.36/static",
+    #"static_base_url": "http://localhost/static",
     #"static_path": os.path.join(os.path.dirname(__file__), "static"),
     #"geoip_dat": os.path.join(os.path.dirname(__file__), "GeoIP.dat"),
 }

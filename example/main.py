@@ -11,11 +11,9 @@ import tcelery
 
 from tornado.web import asynchronous
 from tornado.options import define, options
-from playhouse import postgres_ext
 
 from tcelery_req_handler import routes, tcelery_routes, tcelery_async_routes
 
-import backend
 import handler
 import config
 import backend.v1

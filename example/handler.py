@@ -44,15 +44,6 @@ class InitHandler(tornado.web.RequestHandler):
         exists = model.User.table_exists()
         if not exists:
             model.User.create_table(True)
-        exists = model.Patient.table_exists()
-        if not exists:
-            model.Patient.create_table_fts(content=model.Patient.summary, fail_silently=True)
-        exists = model.Doctor.table_exists()
-        if not exists:
-            model.Doctor.create_table_fts(content=model.Doctor.summary, fail_silently=True)
-        exists = model.Appointment.table_exists()
-        if not exists:
-            model.Appointment.create_table(True)
         '''
         self.write('InitHandler')
 
