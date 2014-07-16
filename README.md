@@ -9,7 +9,7 @@ with fire and forget style or the handler waiting for result style. This module 
 project.
 
 
-Dependencies :
+Prerequisites :
 --------------
 * RabbitMQ server (celery with redis is not supported)
 
@@ -63,9 +63,7 @@ Benchmarks :
 1. Setup
 
     * linux ubuntu virtualbox vm (2 processor, 3 GB memory), 1 tornado process, 1 celery queue
-
 2. Result
-
     * Without database call, waiting for result :
       ab -n 1000 -c 500 http://localhost:8888/v1/user
 
@@ -89,7 +87,6 @@ Benchmarks :
         Waiting:     2103 7900 2125.6   8278   12826
         Total:       2146 8327 2543.6   8280   13850
         ```
-
     * Using database call (postgresql hstore ext, peewee orm, psycopg2), waiting for result :
       ab -n 1000 -c 500 http://localhost:8888/v1/user
 
@@ -113,7 +110,6 @@ Benchmarks :
         Waiting:      837 7859 3417.1   7414   13357
         Total:        873 8242 3898.8   7487   14613
         ```
-
     * Fire and forget :
       ab -n 1000 -c 500 http://localhost:8888/v1/async_user
 
