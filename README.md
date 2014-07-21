@@ -100,9 +100,9 @@ into _body parameter and _query parameter.
         return str(retval)
     ```
 
-Notice the line ```response = yield self.task_handler.get_one(0, *args, **kwargs)``` the task_handler will execute the index 0
-of "self.get_tasks" (previously get_tasks was being set on the routing option). Here is the method to execute one task, many tasks,
-and async tasks for get, post, put and delete method.
+Notice the line ```response = yield self.task_handler.get_one(0, *args, **kwargs)``` from above, the task_handler will execute
+the index 0 of "self.get_tasks" (previously get_tasks was being set on the routing option). Here is the method to execute
+one task, many tasks, and async tasks for get, post, put and delete method.
 
     ```
     def get_one(self, index, *args, **kwargs)  # execute one task from get method
