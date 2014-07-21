@@ -123,19 +123,19 @@ to execute one task, many tasks, and async tasks for get, post, put and delete m
 
     def get_many(self, *args, **kwargs)  # execute many tasks from get_tasks list
 
-    def post_many(self, index, *args, **kwargs)  # execute many tasks from post_tasks list
+    def post_many(self, *args, **kwargs)  # execute many tasks from post_tasks list
 
-    def put_many(self, index, *args, **kwargs)  # execute many tasks from put_tasks list
+    def put_many(self, *args, **kwargs)  # execute many tasks from put_tasks list
 
-    def delete_many(self, index, *args, **kwargs)  # execute many tasks from delete_tasks list
+    def delete_many(self, *args, **kwargs)  # execute many tasks from delete_tasks list
 
     def get_async(self, *args, **kwargs)  # execute async tasks from get_tasks list
 
-    def post_async(self, index, *args, **kwargs)  # execute async tasks from post_tasks list
+    def post_async(self, *args, **kwargs)  # execute async tasks from post_tasks list
 
-    def put_async(self, index, *args, **kwargs)  # execute async tasks from put_tasks list
+    def put_async(self, *args, **kwargs)  # execute async tasks from put_tasks list
 
-    def delete_async(self, index, *args, **kwargs)  # execute async tasks from delete_tasks list
+    def delete_async(self, *args, **kwargs)  # execute async tasks from delete_tasks list
     ```
 
 All of the methods above can be accessed from self.task_handler object if the class is assigned as handler in celery_routes

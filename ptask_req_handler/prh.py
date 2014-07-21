@@ -52,25 +52,25 @@ class TaskHandler(TaskExecutor):
     def get_many(self, *args, **kwargs):
         return self.execute_many(self.handler.get_tasks, "GET", *args, **kwargs)
 
-    def post_many(self, index, *args, **kwargs):
+    def post_many(self, *args, **kwargs):
         return self.execute_many(self.handler.post_tasks, "POST", *args, **kwargs)
 
-    def put_many(self, index, *args, **kwargs):
+    def put_many(self, *args, **kwargs):
         return self.execute_many(self.handler.put_tasks, "PUT", *args, **kwargs)
 
-    def delete_many(self, index, *args, **kwargs):
+    def delete_many(self, *args, **kwargs):
         return self.execute_many(self.handler.delete_tasks, "DELETE", *args, **kwargs)
 
     def get_async(self, *args, **kwargs):
         return self.execute_async(self.handler.get_tasks, "GET", *args, **kwargs)
 
-    def post_async(self, index, *args, **kwargs):
+    def post_async(self, *args, **kwargs):
         return self.execute_async(self.handler.post_tasks, "POST", *args, **kwargs)
 
-    def put_async(self, index, *args, **kwargs):
+    def put_async(self, *args, **kwargs):
         return self.execute_async(self.handler.put_tasks, "PUT", *args, **kwargs)
 
-    def delete_async(self, index, *args, **kwargs):
+    def delete_async(self, *args, **kwargs):
         return self.execute_async(self.handler.delete_tasks, "DELETE", *args, **kwargs)
 
 class TaskRequestHandler(object):
