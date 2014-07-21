@@ -138,7 +138,7 @@ to execute one task, many tasks, and async tasks for get, post, put and delete m
     def delete_async(self, *args, **kwargs)  # execute async tasks from delete_tasks list
     ```
 
-All of the methods above can be accessed from self.task_handler object if the class is assigned as handler in celery_routes
+All of the methods above can be accessed from self.task_handler object if the class is assigned as handler in tcelery_routes
 option
 
 
