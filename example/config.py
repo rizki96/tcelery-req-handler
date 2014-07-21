@@ -18,6 +18,7 @@ _d = {
     "db_port": "5432",
     "db_user": "postgres",
     "db_password": "",
+    "lite_db": "db/default.db",
     "use_cache": False,
     "redis_ipaddr": 'localhost',
     "redis_port": 8889,

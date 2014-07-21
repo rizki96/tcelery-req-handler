@@ -59,6 +59,12 @@ class Application(tornado.web.Application):
             logging.getLogger().setLevel(logging.INFO)
             logging.getLogger().setLevel(logging.WARNING)
 
+        '''
+        from playhouse import apsw_ext
+        from backend import model
+        model.sqlitedb.initialize(apsw_ext.APSWDatabase(config.default.lite_db))
+        '''
+
         tornado.web.Application.__init__(self, routes(handlers), **settings)
 
 def main():

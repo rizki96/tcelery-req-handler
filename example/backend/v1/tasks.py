@@ -1,6 +1,5 @@
 __author__ = 'rizki'
 
-import ujson as json
 import logging
 
 from celery import Celery
@@ -46,7 +45,6 @@ def show_edit_delete_users(*args, **kwargs):
     '''
     return str(retval)
 
-
 """
 from playhouse import postgres_ext
 
@@ -55,7 +53,7 @@ import config
 
 model.psqldb.initialize(postgres_ext.PostgresqlExtDatabase(config.default.db_name, user=config.default.db_user, password=config.default.db_password, host=config.default.db_ipaddr))
 
-# using database
+# using postgresql
 @celery.task
 def list_create_users(*args, **kwargs):
     if args:
@@ -88,6 +86,48 @@ def show_edit_delete_users(*args, **kwargs):
         return {}
     return str(retval)
 """
+"""
+from playhouse import apsw_ext
+
+from backend import model
+import config
+
+model.sqlitedb.initialize(apsw_ext.APSWDatabase(config.default.lite_db))
+
+# using sqlite
+@celery.task
+def list_create_users(*args, **kwargs):
+    if args:
+        logging.info('args: %s' % args)
+    if kwargs:
+        logging.info('kwargs: %s' % kwargs)
+    #logging.info('method: %s' % method)
+    users = model.SqUser.select().limit(10).execute()
+    retval = []
+    for user in users:
+        retval.append(str(user))
+    if not retval:
+        return {}
+    return str(retval)
+
+@celery.task
+def show_edit_delete_users(*args, **kwargs):
+    if args:
+        logging.info('args: %s' % args)
+    if kwargs:
+        logging.info('kwargs: %s' % kwargs)
+    #logging.info('method: %s' % method)
+    try:
+        id = int(args[0])
+        retval = model.SqUser.get(model.SqUser.id == id)
+    except model.SqUser.DoesNotExist as e:
+        #print 'does not exists'
+        #raise e
+        logging.warning(e)
+        return {}
+    return str(retval)
+"""
+
 
 if __name__ == "__main__":
     celery.start()

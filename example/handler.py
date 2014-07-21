@@ -19,31 +19,31 @@ class InitHandler(tornado.web.RequestHandler):
     def get(self):
         from backend import model
         '''
-        user = model.User(name='user1', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user1', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user2', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user2', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user3', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user3', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user4', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user4', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user5', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user5', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user6', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user6', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user7', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user7', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user8', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user8', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user9', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user9', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
-        user = model.User(name='user10', password='test', photo=None, is_superadmin=False, is_active=True)
+        user = model.SqUser(name='user10', password='test', photo=None, is_superadmin=False, is_active=True)
         user.save()
         '''
         '''
-        exists = model.User.table_exists()
+        exists = model.SqUser.table_exists()
         if not exists:
-            model.User.create_table(True)
+            model.SqUser.create_table(True)
         '''
         self.write('InitHandler')
 
