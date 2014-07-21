@@ -59,6 +59,81 @@ How To Use :
     ```
 
 
+Custom Handler :
+----------------
+The routing option can have a handler that customize the web resources being produced. For example the web resources can
+be delivered as json output, by setting content-type to "application/json". Or checking any other conditions such as checking
+tasks that being executed. Below is the "GET" method example and the celery task that will return json, split the parameter
+into _body parameter and _query parameter.
+
+    ```
+    @asynchronous
+    @gen.coroutine
+    def get(self, *args):
+        self.set_header("Content-Type", "application/json")
+        kwargs = {}
+        if not self.get_tasks:
+            self.raise404()
+        kwargs['_query'] = self.request.query_arguments
+        kwargs['_body'] = self.request.body_arguments
+        response = yield self.task_handler.get_one(0, *args, **kwargs)
+        if response.result:
+            self.write(response.result.replace('"', '').replace("'", '"'))
+        else:
+            self.raise404()
+        self.finish()
+
+    @celery.task
+    def list_create_users(*args, **kwargs):
+        if args:
+            logging.info('args: %s' % args)
+        if kwargs:
+            logging.info('kwargs: %s' % kwargs)
+        retval = '''
+        [
+        {'is_superadmin': 0, 'name': 'user1', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 1},
+        {'is_superadmin': 0, 'name': 'user2', 'photo': 'null', 'created_at': 1405424137, 'is_active': 1, 'updated_at': 1405424137, 'password': 'test', 'id': 2},
+        ]
+        '''
+        if not retval:
+            return {}
+        return str(retval)
+    ```
+
+Notice the line ```response = yield self.task_handler.get_one(0, *args, **kwargs)``` the task_handler will execute the index 0
+of "self.get_tasks" (previously get_tasks was being set on the routing option). Here is the method to execute one task, many tasks,
+and async tasks for get, post, put and delete method.
+
+    ```
+    def get_one(self, index, *args, **kwargs)  # execute one task from get method
+
+    def post_one(self, index, *args, **kwargs)  # execute one task from post method
+
+    def put_one(self, index, *args, **kwargs)  # execute one task from put method
+
+    def delete_one(self, index, *args, **kwargs)  # execute one task from delete method
+
+    def get_many(self, *args, **kwargs)  # execute many tasks from get method
+
+    def post_many(self, index, *args, **kwargs)  # execute many tasks from post method
+
+    def put_many(self, index, *args, **kwargs)  # execute many tasks from put method
+
+    def delete_many(self, index, *args, **kwargs)  # execute many tasks from delete method
+
+    def get_async(self, *args, **kwargs)  # execute async tasks from get method
+
+    def post_async(self, index, *args, **kwargs)  # execute async tasks from post method
+
+    def put_async(self, index, *args, **kwargs)  # execute async tasks from put method
+
+    def delete_async(self, index, *args, **kwargs)  # execute async tasks from delete method
+    ```
+
+All of the methods above can be accessed from self.task_handler object if the class is assigned as handler in celery_routes
+option
+
+
 Benchmarks :
 ------------
 1. Setup

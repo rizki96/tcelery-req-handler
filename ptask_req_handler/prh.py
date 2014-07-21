@@ -10,7 +10,6 @@ class TaskExecutor(object):
         serializer = kwargs.pop('serializer', 'json')
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
-        new_args = [method].extend(set(args))
         kwargs['method'] = method
         return gen.Task(task.apply_async, args=args, serializer=serializer, kwargs=kwargs, **kwargs)
 
