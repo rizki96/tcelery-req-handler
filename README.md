@@ -67,22 +67,25 @@ tasks that being executed. Below is the "GET" method example and the celery task
 into _body parameter and _query parameter.
 
     ```
-    @asynchronous
-    @gen.coroutine
-    def get(self, *args):
-        self.set_header("Content-Type", "application/json")
-        kwargs = {}
-        if not self.get_tasks:
-            self.raise404()
-        kwargs['_query'] = self.request.query_arguments
-        kwargs['_body'] = self.request.body_arguments
-        response = yield self.task_handler.get_one(0, *args, **kwargs)
-        if response.result:
-            self.write(response.result.replace('"', '').replace("'", '"'))
-        else:
-            self.raise404()
-        self.finish()
+    # from handler.py
+    class AppHandler(tornado.web.RequestHandler):
+        @asynchronous
+        @gen.coroutine
+        def get(self, *args):
+            self.set_header("Content-Type", "application/json")
+            kwargs = {}
+            if not self.get_tasks:
+                self.raise404()
+            kwargs['_query'] = self.request.query_arguments
+            kwargs['_body'] = self.request.body_arguments
+            response = yield self.task_handler.get_one(0, *args, **kwargs)
+            if response.result:
+                self.write(response.result.replace('"', '').replace("'", '"'))
+            else:
+                self.raise404()
+            self.finish()
 
+    # from tasks.py
     @celery.task
     def list_create_users(*args, **kwargs):
         if args:
@@ -98,11 +101,16 @@ into _body parameter and _query parameter.
         if not retval:
             return {}
         return str(retval)
+
+    # from main.py
+    tcelery_routes(r"/user/?",
+               get_tasks=[backend.v1.list_create_users],
+               handler=handler.AppHandler),
     ```
 
 Notice the line ```response = yield self.task_handler.get_one(0, *args, **kwargs)``` from above, the task_handler will execute
-the index 0 of "self.get_tasks" (previously get_tasks was being set on the routing option). Here is the method to execute
-one task, many tasks, and async tasks for get, post, put and delete method.
+the index 0 of "self.get_tasks" (previously get_tasks was being set on the routing option). Here is the complete function
+to execute one task, many tasks, and async tasks for get, post, put and delete method
 
     ```
     def get_one(self, index, *args, **kwargs)  # execute one task from get method
