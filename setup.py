@@ -4,7 +4,7 @@ from distutils.core import setup
 
 setup(
     name='TornadoCeleryRequest',
-    version='0.1.0',
+    version='0.1.5',
     author='Iskandar Rizki',
     author_email='iskandar.rizki@gmail.com',
     packages=['ptask_req_handler', 'tcelery_req_handler'],
