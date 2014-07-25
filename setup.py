@@ -14,7 +14,7 @@ setup(
     description='Simple routing handler for tornado-celery implementation',
     long_description=open('README.md').read(),
     install_requires=[
-        "tornado >= 3.0.0",
+        "tornado == 3.2.2",
         "celery >= 3.1.0",
         "tornado-celery",
         "pika",
