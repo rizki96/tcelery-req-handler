@@ -7,7 +7,7 @@ from tornado import gen
 class TaskExecutor(object):
 
     def execute_one(self, task, method, *args, **kwargs):
-        logging.info('kwargs: %s' % kwargs)
+        logging.info('args: %s, kwargs: %s' % (args, kwargs))
         serializer = kwargs.pop('serializer', 'json')
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
@@ -16,6 +16,7 @@ class TaskExecutor(object):
         return gen.Task(task.apply_async, args=args, serializer=serializer, kwargs=kwargs, callback=callback)
 
     def execute_many(self, tasks, method, *args, **kwargs):
+        logging.info('args: %s, kwargs: %s' % (args, kwargs))
         serializer = kwargs.pop('serializer', 'json')
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
@@ -27,6 +28,7 @@ class TaskExecutor(object):
         return executed_tasks
 
     def execute_async(self, tasks, method, *args, **kwargs):
+        logging.info('args: %s, kwargs: %s' % (args, kwargs))
         serializer = kwargs.pop('serializer', 'json')
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
