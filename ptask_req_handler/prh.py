@@ -11,7 +11,7 @@ class TaskExecutor(object):
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
         kwargs['method'] = method
-        logging.info('args: %s, kwargs: %s' % (args, kwargs))
+        #logging.info('args: %s, kwargs: %s' % (args, kwargs))
         return gen.Task(task.apply_async, args=args, serializer=serializer, kwargs=kwargs)
 
     def execute_many(self, tasks, method, *args, **kwargs):
@@ -20,7 +20,7 @@ class TaskExecutor(object):
         #serializer = kwargs.pop('serializer', 'pickle')
         executed_tasks = []
         kwargs['method'] = method
-        logging.info('args: %s, kwargs: %s' % (args, kwargs))
+        #logging.info('args: %s, kwargs: %s' % (args, kwargs))
         for task in tasks:
             executed_tasks.append(gen.Task(task.apply_async, args=args, serializer=serializer, kwargs=kwargs))
         return executed_tasks
@@ -30,7 +30,7 @@ class TaskExecutor(object):
         #serializer = kwargs.pop('serializer', 'msgpack')
         #serializer = kwargs.pop('serializer', 'pickle')
         kwargs['method'] = method
-        logging.info('args: %s, kwargs: %s' % (args, kwargs))
+        #logging.info('args: %s, kwargs: %s' % (args, kwargs))
         for task in tasks:
             task.apply_async(args=args, serializer=serializer, kwargs=kwargs)
 
